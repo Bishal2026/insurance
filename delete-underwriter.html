@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Underwriter</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Delete Underwriter by ID</h1>
+        <form id="deleteForm">
+            <label for="delete-id">Underwriter ID:</label>
+            <input type="text" id="delete-id" name="deleteId" required>
+            <button type="submit">Delete</button>
+            <p id="delete-error" class="error-message"></p>
+        </form>
+    </div>
+    <script>
+        let underwriters = [
+            { underwriterId: 1, name: 'John Doe', dob: '1990-01-01', joiningDate: '2024-01-01', password: 'Password@1' }
+        ];
+
+        document.getElementById('deleteForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const deleteId = parseInt(document.getElementById('delete-id').value, 10);
+
+            const index = underwriters.findIndex(u => u.underwriterId === deleteId);
+            if (index > -1) {
+                underwriters.splice(index, 1);
+                document.getElementById('delete-error').innerText = 'Underwriter deleted successfully!';
+            } else {
+                document.getElementById('delete-error').innerText = 'Underwriter not found';
+            }
+        });
+    </script>
+</body>
+
+</html>

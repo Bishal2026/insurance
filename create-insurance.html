@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Vehicle Insurance</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Create Vehicle Insurance</h1>
+        <form id="insuranceForm">
+            <label for="vehicle-no">Vehicle No:</label>
+            <input type="text" id="vehicle-no" name="vehicleNo" maxlength="10" required>
+            <label for="vehicle-type">Vehicle Type:</label>
+            <select id="vehicle-type" name="vehicleType">
+                <option value="2-wheeler">2-wheeler</option>
+                <option value="4-wheeler">4-wheeler</option>
+            </select>
+            <label for="customer-name">Customer Name:</label>
+            <input type="text" id="customer-name" name="customerName" maxlength="50" required>
+            <label for="engine-no">Engine No:</label>
+            <input type="text" id="engine-no" name="engineNo" required>
+            <label for="chassis-no">Chassis No:</label>
+            <input type="text" id="chassis-no" name="chassisNo" required>
+            <label for="phone-no">Phone No:</label>
+            <input type="tel" id="phone-no" name="phoneNo" maxlength="20" required>
+            <label for="premium-amnt">Premium Amount:</label>
+            <input type="number" id="premium-amnt" name="premiumAmnt" required>
+            <label for="insurance-type">Type:</label>
+            <select id="insurance-type" name="insuranceType">
+                <option value="Full Insurance">Full Insurance</option>
+                <option value="Third Party">Third Party</option>
+            </select>
+            <label for="from-date">From Date:</label>
+            <input type="date" id="from-date" name="fromDate" required>
+            <label for="to-date">To Date:</label>
+            <input type="date" id="to-date" name="toDate" required>
+            <label for="underwriter-id">Underwriter ID:</label>
+            <input type="text" id="underwriter-id" name="underwriterId" required>
+            <button type="submit">Create Policy</button>
+            <p id="insurance-error" class="error-message"></p>
+        </form>
+    </div>
+    <script>
+        document.getElementById('insuranceForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const vehicleNo = document.getElementById('vehicle-no').value;
+            const vehicleType = document.getElementById('vehicle-type').value;
+            const customerName = document.getElementById('customer-name').value;
+            const engineNo = document.getElementById('engine-no').value;
+            const chassisNo = document.getElementById('chassis-no').value;
+            const phoneNo = document.getElementById('phone-no').value;
+            const premiumAmnt = document.getElementById('premium-amnt').value;
+            const insuranceType = document.getElementById('insurance-type').value;
+            const fromDate = document.getElementById('from-date').value;
+            const toDate = document.getElementById('to-date').value;
+            const underwriterId = document.getElementById('underwriter-id').value;
+
+            // Implement form submission logic here
+            console.log({
+                vehicleNo,
+                vehicleType,
+                customerName,
+                engineNo,
+                chassisNo,
+                phoneNo,
+                premiumAmnt,
+                insuranceType,
+                fromDate,
+                toDate,
+                underwriterId
+            });
+
+            document.getElementById('insurance-error').innerText = 'Insurance policy created successfully!';
+        });
+    </script>
+</body>
+
+</html>

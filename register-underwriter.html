@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Underwriter</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Register Underwriter</h1>
+        <form id="registerForm">
+            <label for="underwriter-id">Underwriter ID:</label>
+            <input type="text" id="underwriter-id" name="underwriterId" readonly>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" maxlength="50" required>
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" name="dob" required>
+            <label for="joining-date">Joining Date:</label>
+            <input type="date" id="joining-date" name="joiningDate" required>
+            <label for="password">Default Password:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Register</button>
+            <p id="register-error" class="error-message"></p>
+        </form>
+    </div>
+    <script>
+        let underwriters = [];
+        let nextId = 1;
+
+        document.getElementById('underwriter-id').value = nextId;
+
+        document.getElementById('registerForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const underwriterId = nextId++;
+            const name = document.getElementById('name').value;
+            const dob = document.getElementById('dob').value;
+            const joiningDate = document.getElementById('joining-date').value;
+            const password = document.getElementById('password').value;
+
+            // Validate password
+            const passwordPattern = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+            if (!passwordPattern.test(password)) {
+                document.getElementById('register-error').innerText = 'Password must be at least 8 characters long and contain a special character.';
+                return;
+            }
+
+            underwriters.push({
+                underwriterId,
+                name,
+                dob,
+                joiningDate,
+                password
+            });
+
+            document.getElementById('register-error').innerText = 'Underwriter registered successfully!';
+            document.getElementById('registerForm').reset();
+            document.getElementById('underwriter-id').value = nextId;
+        });
+    </script>
+</body>
+
+</html>

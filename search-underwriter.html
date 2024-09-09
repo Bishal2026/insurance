@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Underwriter</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Search Underwriter by ID</h1>
+        <form id="searchForm">
+            <label for="search-id">Underwriter ID:</label>
+            <input type="text" id="search-id" name="searchId" required>
+            <button type="submit">Search</button>
+        </form>
+        <div id="search-results"></div>
+    </div>
+    <script>
+        const underwriters = [
+            { underwriterId: 1, name: 'John Doe', dob: '1990-01-01', joiningDate: '2024-01-01', password: 'Password@1' }
+        ];
+
+        document.getElementById('searchForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const searchId = parseInt(document.getElementById('search-id').value, 10);
+            const result = underwriters.find(u => u.underwriterId === searchId);
+
+            if (result) {
+                document.getElementById('search-results').innerHTML = `
+                    <p>ID: ${result.underwriterId}</p>
+                    <p>Name: ${result.name}</p>
+                    <p>Date of Birth: ${result.dob}</p>
+                    <p>Joining Date: ${result.joiningDate}</p>
+                `;
+            } else {
+                document.getElementById('search-results').innerText = 'Underwriter not found';
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Login</h1>
+        <form id="login-form">
+            <label for="userId">User ID:</label>
+            <input type="text" id="userId" name="userId" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="role">Are you an admin?</label>
+            <select id="role" name="role">
+                <option value="admin">Admin</option>
+                <option value="underwriter">Underwriter</option>
+            </select>
+
+            <button type="submit">Login</button>
+            <p id="login-error" class="error-message"></p>
+        </form>
+    </div>
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const userId = document.getElementById('userId').value;
+            const password = document.getElementById('password').value;
+            const role = document.getElementById('role').value;
+
+            if (role === 'admin' && userId === 'admin' && password === 'adminpass') {
+                window.location.href = 'admin-home.html';
+            } else if (role === 'underwriter') {
+                // For underwriter authentication, you would typically check against a database
+                // Here we use a static check for simplicity
+                const underwriters = [
+                    { underwriterId: 'uw1', password: 'underwriter1' },
+                    { underwriterId: 'uw2', password: 'underwriter2' }
+                ];
+                const validUnderwriter = underwriters.find(u => u.underwriterId === userId && u.password === password);
+                if (validUnderwriter) {
+                    window.location.href = 'underwriter-home.html';
+                } else {
+                    document.getElementById('login-error').innerText = 'Invalid Underwriter credentials.';
+                }
+            } else {
+                document.getElementById('login-error').innerText = 'Invalid Admin credentials.';
+            }
+        });
+    </script>
+</body>
+
+</html>
