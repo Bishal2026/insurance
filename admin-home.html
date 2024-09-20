@@ -5,20 +5,107 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Home</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="./style1.css">
+    <script src="./script-registar.js" defer></script>
+    <script src="./script-search.js" defer></script>
+    <script src="./script-upadte.js" defer></script>
+
 </head>
 
 <body>
+    <div class="navbar">
+        <img id="icons"
+            src="https://static.vecteezy.com/system/resources/previews/019/852/353/non_2x/car-insurance-illustration-on-a-background-premium-quality-symbols-icons-for-concept-and-graphic-design-vector.jpg"
+            alt=" icons">
+        <h1> Star Protect Vehicle Insurance System</h1>
+
+        <h3>Admin Home</h3>
+        <button onclick="logoutFormAdmin()">logout</button>
+    </div>
     <div class="container">
-        <h1>Admin Home</h1>
-        <ul>
+        <div class="container-registar">
+            <h1>Register Underwriter</h1>
+            <form id="registerForm">
+                <label for="underwriter-id">Underwriter ID:</label>
+                <input type="text" id="underwriter-id" name="underwriterId" readonly>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" maxlength="50" required>
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob" required>
+                <label for="joining-date">Joining Date:</label>
+                <input type="date" id="joining-date" name="joiningDate" required>
+                <label for="password">Default Password:</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit">Register</button>
+                <p id="register-error" class="error-message"></p>
+            </form>
+        </div>
+        <div class="container-search">
+            <div class="output">
+                <form id="searchForm">
+                    <label for="search-id">Underwriter ID:</label>
+                    <input type="text" id="search-id" name="searchId" required>
+                    <button type="submit">Search</button>
+                </form>
+
+                <div id="search-results"></div>
+            </div>
+
+            <h1>Search Underwriter by ID</h1>
+        </div>
+        <div class="container-update">
+            <h1>Update Underwriter Password</h1>
+            <form id="updatePasswordForm">
+                <label for="update-id">Underwriter ID:</label>
+                <input type="text" id="update-id" name="updateId" required>
+                <label for="new-password">New Password:</label>
+                <input type="password" id="new-password" name="newPassword" required>
+                <button type="submit">Update Password</button>
+                <p id="update-error" class="error-message"></p>
+            </form>
+        </div>
+        <div class="container-delete">
+
+            <form id="deleteForm">
+                <label for="delete-id">Underwriter ID:</label>
+                <input type="text" id="delete-id" name="deleteId" required>
+                <button type="submit">Delete Underwriter</button>
+                <p id="delete-error" class="error-message"></p>
+            </form>
+            <h1>Delete Underwriter</h1>
+        </div>
+        <div class="container-view">
+            <h1>View All Underwriters</h1>
+            <table id="underwriters-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Date of Birth</th>
+                        <th>Joining Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- <ul>
             <li><a href="register-underwriter.html">Register Underwriter</a></li>
             <li><a href="search-underwriter.html">Search Underwriter by ID</a></li>
             <li><a href="update-password.html">Update Underwriter Password</a></li>
             <li><a href="delete-underwriter.html">Delete Underwriter by ID</a></li>
             <li><a href="view-underwriters.html">View All Underwriters</a></li>
-        </ul>
+        </ul> -->
     </div>
+
+    <div class="footer">
+        All &copy; rights reserved for Star Protect Vehicle Insurance System.
+    </div>
+    <script>
+
+    </script>
 </body>
 
 </html>

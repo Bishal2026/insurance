@@ -10,15 +10,15 @@
 
 <body>
     <div class="container">
-        <h1>Login</h1>
-        <form id="login-form">
-            <label for="userId">User ID:</label>
+        <h1>Login page</h1>
+        <form action="" id="login-form">
+            <label for="userId" id="label1">User ID:</label>
             <input type="text" id="userId" name="userId" required>
 
-            <label for="password">Password:</label>
+            <label for="password" id="label2">Password:</label>
             <input type="password" id="password" name="password" required>
 
-            <label for="role">Are you an admin?</label>
+            <label for="role" id="label3">Are you an admin or underwriter?</label>
             <select id="role" name="role">
                 <option value="admin">Admin</option>
                 <option value="underwriter">Underwriter</option>
@@ -34,24 +34,32 @@
             const userId = document.getElementById('userId').value;
             const password = document.getElementById('password').value;
             const role = document.getElementById('role').value;
+            const errorElement = document.getElementById('login-error');
 
-            if (role === 'admin' && userId === 'admin' && password === 'adminpass') {
-                window.location.href = 'admin-home.html';
+            // Clear the previous error message
+            errorElement.innerText = '';
+
+            if (role === 'admin' && userId === 'admin' && password === 'admin123') {
+                // Redirect to admin home page
+                window.location.href = './admin-home.html';
             } else if (role === 'underwriter') {
-                // For underwriter authentication, you would typically check against a database
-                // Here we use a static check for simplicity
-                const underwriters = [
-                    { underwriterId: 'uw1', password: 'underwriter1' },
-                    { underwriterId: 'uw2', password: 'underwriter2' }
-                ];
-                const validUnderwriter = underwriters.find(u => u.underwriterId === userId && u.password === password);
+                // Get underwriters from localStorage
+                const underwriters = JSON.parse(localStorage.getItem('underwriters')) || [];
+
+                // Find the underwriter with the matching ID and password
+                const validUnderwriter = underwriters.find(u => u.underwriterId == userId && u.password === password);
+
                 if (validUnderwriter) {
+                    // Store the logged-in underwriter ID in sessionStorage
+                    sessionStorage.setItem('loggedInUnderwriterId', validUnderwriter.underwriterId);
+
+                    // Redirect to underwriter home page
                     window.location.href = 'underwriter-home.html';
                 } else {
-                    document.getElementById('login-error').innerText = 'Invalid Underwriter credentials.';
+                    errorElement.innerText = 'Invalid Underwriter credentials.';
                 }
             } else {
-                document.getElementById('login-error').innerText = 'Invalid Admin credentials.';
+                errorElement.innerText = 'Invalid role or credentials.';
             }
         });
     </script>

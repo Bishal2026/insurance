@@ -5,16 +5,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Underwriter Home</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style1.css">
+    <script src="./underwriter.js" defer></script>
+    <!-- <script src="./underwriter-insurance.js" defer></script> -->
 </head>
 
 <body>
+    <div class="navbar">
+        <img id="icons"
+            src="https://static.vecteezy.com/system/resources/previews/019/852/353/non_2x/car-insurance-illustration-on-a-background-premium-quality-symbols-icons-for-concept-and-graphic-design-vector.jpg"
+            alt=" icons">
+        <h1> Star Protect Vehicle Insurance System</h1>
+
+        <h3>Underwriter Home</h3>
+        <!-- Logout Button -->
+        <button id="logoutButton">Logout</button>
+    </div>
+    <!-- This is where the Underwriter's ID will be displayed -->
+    <p id="welcome-message">Welcome, Underwriter ID: <span id="underwriter-id"></span></p>
+
     <div class="container">
-        <h1>Underwriter Home</h1>
+
+        <div class="container">
+            <h1>Create Vehicle Insurance</h1>
+            <form id="insuranceForm">
+                <label for="vehicle-no">Vehicle No:</label>
+                <input type="text" id="vehicle-no" name="vehicleNo" maxlength="10" required>
+                <label for="vehicle-type">Vehicle Type:</label>
+                <select id="vehicle-type" name="vehicleType">
+                    <option value="2-wheeler">2-wheeler</option>
+                    <option value="4-wheeler">4-wheeler</option>
+                </select>
+                <label for="customer-name">Customer Name:</label>
+                <input type="text" id="customer-name" name="customerName" maxlength="50" required>
+                <label for="engine-no">Engine No:</label>
+                <input type="text" id="engine-no" name="engineNo" required>
+                <label for="chassis-no">Chassis No:</label>
+                <input type="text" id="chassis-no" name="chassisNo" required>
+                <label for="phone-no">Phone No:</label>
+                <input type="tel" id="phone-no" name="phoneNo" maxlength="20" required>
+                <label for="premium-amnt">Premium Amount:</label>
+                <input type="number" id="premium-amnt" name="premiumAmnt" required>
+                <label for="insurance-type">Type:</label>
+                <select id="insurance-type" name="insuranceType">
+                    <option value="Full Insurance">Full Insurance</option>
+                    <option value="Third Party">Third Party</option>
+                </select>
+                <label for="from-date">From Date:</label>
+                <input type="date" id="from-date" name="fromDate" required>
+                <label for="to-date">To Date:</label>
+                <input type="date" id="to-date" name="toDate" required>
+                <label for="underwriter-id">Underwriter ID:</label>
+                <input type="text" id="underwriter-id" name="underwriterId" readonly>
+                <button type="submit">Create Policy</button>
+                <p id="insurance-error" class="error-message"></p>
+            </form>
+        </div>
+
+
         <ul>
             <li><a href="create-insurance.html">Create Vehicle Insurance</a></li>
         </ul>
+
+
     </div>
+    <div class="footer">
+        All &copy; rights reserved for Star Protect Vehicle Insurance System.
+    </div>
+
+   
 </body>
 
 </html>

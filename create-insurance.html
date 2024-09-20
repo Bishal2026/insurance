@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Vehicle Insurance</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style02.css">
 </head>
 
 <body>
@@ -39,14 +39,37 @@
             <label for="to-date">To Date:</label>
             <input type="date" id="to-date" name="toDate" required>
             <label for="underwriter-id">Underwriter ID:</label>
-            <input type="text" id="underwriter-id" name="underwriterId" required>
+            <input type="text" id="underwriter-id" name="underwriterId" readonly>
             <button type="submit">Create Policy</button>
             <p id="insurance-error" class="error-message"></p>
         </form>
     </div>
+
     <script>
+        // Retrieve the logged-in underwriter ID from sessionStorage
+        const loggedInUnderwriterId = sessionStorage.getItem('loggedInUnderwriterId');
+
+        // Display the Underwriter ID in the form
+        if (loggedInUnderwriterId) {
+            document.getElementById('underwriter-id').value = loggedInUnderwriterId;
+        } else {
+            document.getElementById('insurance-error').innerText = 'Error: Underwriter not logged in.';
+        }
+
+        // Retrieve existing insurance policies from localStorage
+        function getInsurancePolicies() {
+            return JSON.parse(localStorage.getItem('insurancePolicies')) || [];
+        }
+
+        // Save insurance policies back to localStorage
+        function saveInsurancePolicies(policies) {
+            localStorage.setItem('insurancePolicies', JSON.stringify(policies));
+        }
+
+        // Handle form submission
         document.getElementById('insuranceForm').addEventListener('submit', function (event) {
             event.preventDefault();
+
             const vehicleNo = document.getElementById('vehicle-no').value;
             const vehicleType = document.getElementById('vehicle-type').value;
             const customerName = document.getElementById('customer-name').value;
@@ -59,8 +82,8 @@
             const toDate = document.getElementById('to-date').value;
             const underwriterId = document.getElementById('underwriter-id').value;
 
-            // Implement form submission logic here
-            console.log({
+            // Create the new policy object
+            const newPolicy = {
                 vehicleNo,
                 vehicleType,
                 customerName,
@@ -72,9 +95,18 @@
                 fromDate,
                 toDate,
                 underwriterId
-            });
+            };
 
+            // Retrieve existing policies, add the new policy, and save it back to localStorage
+            const policies = getInsurancePolicies();
+            policies.push(newPolicy);
+            saveInsurancePolicies(policies);
+
+            // Show success message and reset the form
             document.getElementById('insurance-error').innerText = 'Insurance policy created successfully!';
+            document.getElementById('insuranceForm').reset();
+            // Refill the underwriter ID since the form is reset
+            document.getElementById('underwriter-id').value = loggedInUnderwriterId;
         });
     </script>
 </body>
